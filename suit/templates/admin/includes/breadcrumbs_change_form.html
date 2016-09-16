@@ -1,0 +1,21 @@
+{% load i18n %}
+
+{% if not is_popup %}
+    {% block breadcrumbs %}
+        <section class="content-header">
+            <h1>
+                Listagem de {{ opts.verbose_name_plural|capfirst }}
+            </h1>
+
+            <ol class="breadcrumb">
+                <li><a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+                    </li>
+                <li>
+                    <a href="{% url 'admin:app_list' app_label=opts.app_label %}">{{ app_label|capfirst|escape }}</a>
+                    </li>
+                <li class="active">{{ opts.verbose_name_plural|capfirst }}</li>
+            </ol>
+        </section>
+
+    {% endblock %}
+{% endif %}

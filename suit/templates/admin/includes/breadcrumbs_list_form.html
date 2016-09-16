@@ -1,0 +1,69 @@
+{% load i18n %}
+{% if not is_popup %}
+    {% block breadcrumbs %}
+        <section class="content-header">
+            <h1>
+                Listagem de {{ cl.opts.verbose_name_plural|capfirst }}
+            </h1>
+
+            <ol class="breadcrumb">
+                <li><a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+                    </li>
+                <li>
+{#                    <a href="{% url 'admin:app_list' app_label=cl.opts.app_label %}">{{ app_label|capfirst|escape }}</a>#}
+                    </li>
+                <li class="active">{{ cl.opts.verbose_name_plural|capfirst }}</li>
+            </ol>
+        </section>
+
+    {% endblock %}
+{% endif %}
+
+
+ {% block extrahead %}
+  <script type="text/javascript">
+ window.onload = function() {
+
+  // already an add page
+  var docLoc = document.location.href;
+  if( docLoc.indexOf('/add/')+5 == docLoc.length )
+    return;
+
+ // add button
+  var domOrig = document.getElementsByName( '_continue' );
+  var domAdd = document.getElementsByName( '_addanother' );
+
+ // should only be one
+ if( !domOrig || !domOrig[0] ) return;
+ domOrig = domOrig[0];
+  if( !domAdd || !domAdd[0] ) return;
+  domAdd = domAdd[0];
+
+  // copy the continue button
+  var domClone = document.createElement( 'input' );
+  domClone.type = domOrig.type;
+  domClone.size = domOrig.size;
+  domClone.name = domOrig.name;
+  domClone.className = domOrig.className;
+  domClone.value = 'Copy and continue editing';
+
+  // insert before add button
+  domOrig.parentNode.insertBefore(domClone,domAdd);
+
+  // on click event
+  domClone.onclick = function() {
+    // location, form, action
+    var docLoc = document.location.href;
+    var domForm = document.forms[0]
+    var strAction = docLoc.substring( 0, docLoc.lastIndexOf('/',docLoc.length-2) ) + '/add/';
+
+    // copy button ~ add button and will fail on unique-ness-es
+   //   unless uniques are modified on page
+    domForm.action = strAction;
+    domForm.submit();
+    return( true );
+   }
+ }
+ </script>
+ {% endblock %}
+

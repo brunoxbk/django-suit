@@ -1,0 +1,107 @@
+body > .header .logo {
+font-family: arial;
+font-weight: bold;
+}
+
+.sidebar{
+    position: absolute;
+    bottom: 60px;
+}
+
+label {
+    font-weight: normal;
+}
+
+.sidebar .sidebar-menu {
+    padding-top: 50px;
+}
+
+.bg-black {
+ background: url(../img/128-normal.png) no-repeat center center fixed;
+background-color: #1ca89d !important;
+-webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.required {
+    font-weight: bold;
+
+}
+
+.required:after {
+    margin: 0 0 0 5px;
+    position: absolute;
+    content: '(obrigatório)';
+    font-size: 11px;
+    font-style: italic;
+    color: #666;
+}
+
+.skin-black .logo {
+background-color: #13a89e;
+color: #ffffff;
+}
+
+.skin-black .logo:hover {
+background: #0D837B;
+}
+
+.authors {
+    position: absolute;
+    bottom: 0;
+    height: 51px;
+    width: 100%;
+    background: #13a89e;
+    color: #ffffff;
+    padding: 10px;
+    left: 0;
+    text-align: center;
+    font-weight: bold;
+}
+
+.small-box h3 {
+    font-size: 24px;
+    color: #ffffff;
+}
+.small-box p {
+    color: #ffffff;
+}
+
+.small-box .icon {
+    font-size: 75px;
+}
+
+@keyframes tansformAnimation {
+  from {
+    font-size: 75px;
+  }
+  to {
+    font-size: 85px;
+  }
+}
+@-webkit-keyframes tansformAnimation {
+  from {
+    font-size: 75px;
+  }
+  to {
+    font-size: 85px;
+  }
+}
+
+.left-side{
+position: fixed;
+top: 10px;
+bottom: 0;
+height: auto !important;
+    min-height: 100% !important;
+}
+
+@media screen and (max-width: 992px){
+body.fixed .sidebar-offcanvas {
+margin-top: 0px !important;
+left: -220px;
+padding-top: 45px !important;
+}
+}

@@ -1,0 +1,57 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_static build_menu %}
+
+{% block content %}
+    <aside class="right-side">
+        <section class="content-header">
+            <h1>
+                Postagens
+            </h1>
+        </section>
+        <section class="content">
+            <div class="row">
+                <div class="col-lg-3 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box {% firstof app.color 'bg-green' %}">
+                        <div class="inner">
+                            <a href="#"><h3>Eventos</h3><p>Postagem</p></a>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-ios7-filing-outline"></i>
+                        </div>
+                            <a href="#" class="small-box-footer">
+                                Gerenciar <i class="fa fa-arrow-circle-right"></i>
+                            </a>
+                    </div>
+                </div><!-- ./col -->
+                <div class="col-lg-3 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box {% firstof app.color 'bg-green' %}">
+                        <div class="inner">
+                            <a href="{% url 'news' %}"><h3>Noticias</h3><p>Postagem</p></a>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-ios7-filing-outline"></i>
+                        </div>
+                            <a href="#" class="small-box-footer">
+                                Gerenciar <i class="fa fa-arrow-circle-right"></i>
+                            </a>
+                    </div>
+                </div><!-- ./col -->
+            </div>
+            <!-- /.row -->
+        </section>
+        <!-- /.content -->
+    </aside><!-- /.right-side -->
+{% endblock %}
+{% block extra_js %}
+    <script type="text/javascript">
+        function add_extra_menu(){
+            $(".sidebar-menu").append('<li class="treeview"><a href="#"><i class="ion ion-ios7-filing-outline"></i><span>Controle</span><i class="fa fa-angle-left pull-right"></i> </a> <ul class="treeview-menu"> <li><a style="margin-left: 10px;"><i class="fa fa-angle-double-right"></i> Fluxo de Caixa </a></li> </ul> </li>');
+        }
+
+        $(document).ready(function(){
+            add_extra_menu();
+        });
+    </script>
+{% endblock %}

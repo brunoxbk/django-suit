@@ -1,0 +1,53 @@
+{% load suit_tags %}
+{% load build_menu %}
+{% load staticfiles %}
+{#{% generate_menu %}#}
+<!-- coluna esquerda do menu -->
+<aside class="left-side sidebar-offcanvas">
+    <!-- menu: style can be found in sidebar.less -->
+    <section class="sidebar">
+        <!-- formulario de busca-->
+        {% with 'SEARCH_URL'|suit_conf as search_url %}
+            {% if search_url %}
+            <form action="{% if '/' in search_url %}{{ search_url }}{% else %}{% url search_url %}{% endif %}" method="get" class="sidebar-form">
+                <div class="input-group">
+                    <input type="text" name="q" class="form-control" placeholder="Search..."/>
+                    <span class="input-group-btn">
+                        <button type='submit' class="btn btn-flat">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </span>
+                </div>
+            </form>
+            {% endif %}
+        {% endwith %}
+        <!-- /.formulario de busca -->
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        {% get_menu request as app_list %}
+        {% if app_list %}
+            <ul class="sidebar-menu">
+            {% for app in app_list %}
+                <li class="treeview">
+                    <a href="#">
+                        <i class="{% firstof app.icon 'icon-chevron-right' %}"></i>
+                        <span>{{ app.label|capfirst }}</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    {% if app.models %}
+                        <ul class="treeview-menu">
+                            {% for model in app.models %}
+                                <li><a href="{{ model.url }}"><i class="fa fa-angle-double-right"></i> {{ model.label }}
+                                </a></li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    </section>
+    <!-- /.sidebar -->
+    <div class="authors">
+        <p>Powered by <img src="{% static 'admin/fonts/dev128bits.png' %}"></p>
+    </div>
+</aside>

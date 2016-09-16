@@ -1,0 +1,50 @@
+{% load i18n %}
+{% load suit_tags %}
+<header class="header">
+    <a href="{% url 'admin:index' %}" class="logo">
+        {{ 'ADMIN_NAME'|suit_conf }}
+    </a>
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top" role="navigation">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </a>
+        {% if user.is_active and user.is_staff %}
+        <div class="navbar-right">
+            <ul class="nav navbar-nav">
+                <!-- User Account: style can be found in dropdown.less -->
+                <li class="dropdown user user-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="glyphicon glyphicon-user"></i>
+                        <span>{% trans 'Welcome,' %} {{ user.username }}<i class="caret"></i></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <!-- User image -->
+                        <li class="user-header bg-light-blue">
+                            <img src="" class="img-circle">
+                            <p>
+                                {{ user.first_name }} - {{ user.last_name}}
+                                <small>Membro desde: {{ user.date_joined|date:"M/Y" }}</small>
+                            </p>
+                        </li>
+                        <li class="user-footer">
+                            {% if user.has_usable_password %}
+                            <div class="pull-left">
+                                <a href="{% url 'admin:password_change' %}" class="btn btn-default btn-flat">{% trans 'Change password' %}</a>
+                            </div>
+                            {% endif %}
+                            <div class="pull-right">
+                                <a href="{% url 'admin:logout' %}" class="btn btn-default btn-flat">{% trans 'Log out' %}</a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        {% endif %}
+    </nav>
+</header>

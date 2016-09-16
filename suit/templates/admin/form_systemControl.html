@@ -1,0 +1,8 @@
+{% load widget_tweaks %}
+{% for campo in form %}
+<!-- text input -->
+<div class="form-group {% if campo.errors %}has-error{% endif %}">
+    {{ campo.label_tag }}
+    {{ campo|add_class:"form-control"|append_attr:"id:inputError" }}
+</div>
+{% endfor %}

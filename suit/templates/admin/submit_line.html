@@ -1,16 +1,13 @@
-{% load i18n admin_urls suit_tags %}
-<div class="submit-row clearfix">
-  {% if show_save %}<button type="submit" class="btn btn-high btn-info" name="_save">{% trans 'Save' %}</button>{% endif %}
-  {% if show_save_and_continue %}<button type="submit" name="_continue" class=" btn btn-high">{% trans 'Save and continue editing' %}</button>{% endif %}
-  {% if show_save_as_new %}<button type="submit" name="_saveasnew" class="btn">{% trans 'Save as new' %}</button>{%endif%}
-  {% if show_save_and_add_another %}<button type="submit" name="_addanother" class="btn">{% trans 'Save and add another' %}</button>{% endif %}
+{% load i18n admin_urls %}
+{% block submit_buttons_bottom%}
+<div class="submit-row">
+{% if show_save %}<button type="submit" class="btn btn-success" name="_save" {{ onclick_attrib }}>{% trans 'Save' %}</button>{% endif %}
 
-  {% if show_delete_link %}
-    {% if '1.9'|django_version_lt %}
-      <a href="delete/" class="text-error deletelink">{% trans "Delete" %}</a>
-    {% else %}
-        {% url opts|admin_urlname:'delete' original.pk|admin_urlquote as delete_url %}
-        <a href="{% add_preserved_filters delete_url %}" class="text-error deletelink">{% trans "Delete" %}</a>
-    {% endif %}
-  {% endif %}
+{% if show_delete_link %}<a class="btn btn-info" href="{% url opts|admin_urlname:'changelist' %}" class="deletelink">{% trans "Cancelar Alterações" %}</a>{% endif %}
+
+{% if show_delete_link %}<a class="btn btn-danger" href="{% url opts|admin_urlname:'delete' original.pk|admin_urlquote %}" class="deletelink">{% trans "Delete" %}</a>{% endif %}
+{% if show_save_as_new %}<input type="submit" class="btn btn-success" value="{% trans 'Save as new' %}" name="_saveasnew" {{ onclick_attrib }}/>{%endif%}
+{% if show_save_and_add_another %}<input type="submit" class="btn btn-primary" value="{% trans 'Save and add another' %}" name="_addanother" {{ onclick_attrib }}/>{% endif %}
+{% if show_save_and_continue %}<input type="submit" class="btn btn-default" value="{% trans 'Save and continue editing' %}" name="_continue" {{ onclick_attrib }}/>{% endif %}
 </div>
+{% endblock %}
