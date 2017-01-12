@@ -5,7 +5,11 @@
 <html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
 <head>
     <meta charset="UTF-8">
-    <title>Manage-CMS | Dashboard{% block title %}{% endblock %}</title>
+    {% if 'ADMIN_NAME'|suit_conf  %}
+		<title>{{'ADMIN_NAME'|suit_conf }}</title>
+	{% else %}
+		<title>Manage-CMS | Dashboard</title>
+	{% endif %}
 
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- bootstrap 3.0.2 -->
