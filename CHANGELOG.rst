@@ -28,6 +28,12 @@ v0.2.18 (2016-03-03)
 * [Fix] Django 1.9 time and date widgets fixes `#481 <https://github.com/darklow/django-suit/issues/481>`_
 
 
+v0.2.18 (2016-03-03)
+--------------------
+
+* [Fix] Django 1.9 time and date widgets fixes `#481 <https://github.com/darklow/django-suit/issues/481>`_
+
+
 v0.2.17 (2016-02-23)
 --------------------
 
