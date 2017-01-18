@@ -17,7 +17,11 @@
 
 
 {% block content %}
-<div id="content-main">
+<aside class="right-side">
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
     <div class="alert alert-info">{% blocktrans %}Choose a date from the list below to recover a deleted version of an object.{% endblocktrans %}</div>
     <div class="module">
         {% if deleted %}
@@ -41,5 +45,7 @@
         <div class="alert alert-warn">{% trans "There are no deleted objects to recover." %}</div>
         {% endif %}
     </div>
-</div>
+  </div>
+  </section>
+</aside>
 {% endblock %}

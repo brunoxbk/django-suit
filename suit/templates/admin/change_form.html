@@ -15,6 +15,21 @@
 
         <!-- Main content -->
         <section class="content">
+          <div class="row">
+            <div class="col-xs-11">
+            {% block object-tools %}
+            {% if change %}{% if not is_popup %}
+              <div class="btn-group" style="float:right;">
+                {% block object-tools-items %}
+                    {% url opts|admin_urlname:'history' original.pk|admin_urlquote as history_url %}
+                    <a href="{% add_preserved_filters history_url %}" class="btn btn-block btn-default">{% trans "History" %}</a>
+                {% if has_absolute_url %}<a href="{{ absolute_url }}" class="btn btn-block btn-default">{% trans "View on site" %}</a></li>{% endif %}
+                {% endblock %}
+              </div>
+            {% endif %}{% endif %}
+            {% endblock %}
+            </div>
+          </div>
             <div class="row">
                 <!-- right column -->
                 <div class="col-xs-11">

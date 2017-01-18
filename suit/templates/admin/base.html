@@ -49,6 +49,8 @@
             {% include "admin/includes/menu.html" %}
         {% endif %}
         {% block content %}
+        {% block object-tools %}{% endblock %}
+        {{ content }}
 
         {% endblock %}
 

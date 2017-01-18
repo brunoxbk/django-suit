@@ -2,8 +2,8 @@
 {% load i18n admin_urls %}
 
 {% block object-tools-items %}
-{% if not is_popup %}
-<a href="{% url opts|admin_urlname:'recoverlist' %}" class="recoverlink btn">
+{% if not is_popup and perms.reversion.can_change %}
+<a href="{% url opts|admin_urlname:'recoverlist' %}" class="btn btn-warning">
     <i class="icon-repeat"></i>&nbsp;
     {% blocktrans with cl.opts.verbose_name_plural|escape as name %}Recover deleted {{ name }}{% endblocktrans %}</a>
 {% endif %}
