@@ -5,7 +5,7 @@
 {% block extrahead %}{{ block.super }}
     <link rel="stylesheet" type="text/css" href="{% static "admin/css/widgets.css" %}" />
     <script type="text/javascript" src="{% url 'admin:jsi18n' %}"></script>
-    {{ media }}
+    
 {% endblock %}
 
 {% block content %}
@@ -63,6 +63,7 @@
                           {% if has_file_field %}enctype="multipart/form-data" {% endif %}>
                         {% csrf_token %}
                         {% if is_popup %}<input type="hidden" name="_popup" value="1"/>{% endif %}
+                        {% if to_field %}<input type="hidden" name="{{ to_field_var }}" value="{{ to_field }}" />{% endif %}
 
                         {% block field_sets %}
                             {% for fieldset in adminform %}
@@ -89,9 +90,64 @@
         </section>
         <!-- /.content -->
     </aside><!-- /.right-side -->
+    {% block admin_change_form_document_ready %}
+    <script type="text/javascript">
+        (function($) {
+            $(document).ready(function() {
+                $('.add-another').click(function(e) {
+                    e.preventDefault();
+                    var event = $.Event('django:add-another-related');
+                    $(this).trigger(event);
+                    if (!event.isDefaultPrevented()) {
+                        showAddAnotherPopup(this);
+                    }
+                });
+                $('.related-lookup').click(function(e) {
+                    e.preventDefault();
+                    var event = $.Event('django:lookup-related');
+                    $(this).trigger(event);
+                    if (!event.isDefaultPrevented()) {
+                        showRelatedObjectLookupPopup(this);
+                    }
+                });
+                $('body').on('click', '.related-widget-wrapper-link', function(e) {
+                    e.preventDefault();
+                    if (this.href) {
+                        var event = $.Event('django:show-related', {href: this.href});
+                        $(this).trigger(event);
+                        if (!event.isDefaultPrevented()) {
+                            showRelatedObjectPopup(this);
+                        }
+                    }
+                });
+                $('body').on('change', '.related-widget-wrapper select', function(e) {
+                    var event = $.Event('django:update-related');
+                    $(this).trigger(event);
+                    if (!event.isDefaultPrevented()) {
+                        updateRelatedObjectLinks(this);
+                    }
+                });
+                $('.related-widget-wrapper select').trigger('change');
+
+            {% if adminform and add %}
+                $('form#{{ opts.model_name }}_form :input:visible:enabled:first').focus()
+            {% endif %}
+            });
+        })(django.jQuery);
+    </script>
 {% endblock %}
+
+{# JavaScript for prepopulated fields #}
+{% prepopulated_fields_js %}
+{% endblock %}
+
+
 {% block extrajs %}
+    {%comment%}
     <script src="{% static 'admin/js/jquery-ui-1.10.3.min.js' %}"></script>
     <script src="{% static 'admin/js/jquery-ui-1.10.4.custom.min.js' %}" type="text/javascript"></script>
+    {% endcomment %}
     <script src="{% static 'admin/js/jquery.maskedinput.js' %}" type="text/javascript"></script>
+    {{ media }}
 {% endblock %}
+
