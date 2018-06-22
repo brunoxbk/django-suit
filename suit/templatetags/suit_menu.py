@@ -2,7 +2,7 @@ from django import template
 from django.contrib import admin
 from django.contrib.admin import AdminSite
 from django.core.handlers.wsgi import WSGIRequest
-from django.core.urlresolvers import reverse, resolve
+from django.urls import reverse, resolve
 
 try:
     from django.utils.six import string_types
@@ -18,7 +18,7 @@ from suit.config import get_config
 register = template.Library()
 
 
-@register.assignment_tag(takes_context=True)
+@register.simple_tag(takes_context=True)
 def get_menu(context, request):
     """
     :type request: WSGIRequest
