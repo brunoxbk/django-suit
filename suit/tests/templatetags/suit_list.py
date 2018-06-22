@@ -1,6 +1,6 @@
 from django.contrib.admin import ModelAdmin
 from django.contrib.admin.templatetags.admin_list import result_list
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from suit.templatetags.suit_list import paginator_number, paginator_info, \
     pagination, suit_list_filter_select, headers_handler, dict_to_attrs, \
     result_row_attrs, cells_handler
